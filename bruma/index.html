@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1421">
+<title>BRUMA · Gremios del Confín — Alfa jugable</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{--bg:#09131f;--card:#122031;--card2:#172638;--line:#294052;--ink:#eaf1f4;--muted:#9aadb9;--gold:#e6be77;--green:#79d4aa;--red:#f38e88;--blue:#8dc8df;--radius:17px}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:14px/1.5 'DM Sans',system-ui,sans-serif;background:radial-gradient(ellipse 900px 440px at 84% -4%,#183f4a88,transparent),radial-gradient(ellipse 650px 550px at 5% 30%,#35284738,transparent),var(--bg)}button,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}h1,h2,h3,p{margin:0}h1,h2,h3,.number{font-family:'Space Grotesk',sans-serif}h1{font-size:clamp(35px,5.5vw,63px);line-height:1.08;letter-spacing:-.052em}h2{font-size:21px;letter-spacing:-.03em}h3{font-size:15px}a{color:var(--gold)}
+.wrap{max-width:1330px;margin:auto;padding:0 24px 70px}.topbar{height:76px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff15;gap:14px}.brand{display:flex;gap:12px;align-items:center;font:700 18px 'Space Grotesk',sans-serif;letter-spacing:.17em}.logo{width:34px;height:34px;display:grid;place-items:center;background:#e6be7718;border:1px solid #e6be7780;border-radius:10px;color:var(--gold)}.micro{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.topright{display:flex;align-items:center;gap:12px}.pill{padding:7px 12px;border:1px solid var(--line);border-radius:50px;color:var(--muted);font-size:12px}.dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:99px;box-shadow:0 0 14px var(--green);margin-right:7px}.quiet{background:none;color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:9px 12px}.quiet:hover,.ghost:hover{color:var(--ink);border-color:#6d8194}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr);gap:30px;align-items:end;padding:49px 0 30px}.hero small{font-size:12px;color:var(--gold);letter-spacing:.19em;font-weight:700}.hero p{color:var(--muted);max-width:610px;margin-top:16px;font-size:15px}.em{color:var(--gold)}.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#132333ba;border:1px solid var(--line);padding:18px;border-radius:14px;min-height:105px}.stat b{display:block;font:700 25px 'Space Grotesk',sans-serif;margin-top:7px;white-space:nowrap}.stat span{color:var(--muted);font-size:11px}.stat .small{font-size:11px}
+.tabs{display:flex;gap:7px;overflow:auto;padding:13px 0 16px;border-top:1px solid #ffffff12}.tab{background:transparent;border:1px solid transparent;color:var(--muted);padding:11px 18px;border-radius:11px;white-space:nowrap;font-weight:700}.tab.active{background:#1d3141;border-color:#436078;color:#fff}.tab:hover{color:#fff}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px}.main.one{display:block}.panel{border:1px solid var(--line);border-radius:var(--radius);background:#111e2eae;padding:21px;min-width:0}.panel+.panel{margin-top:17px}.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px}.sub{color:var(--muted);font-size:12px;margin-top:4px}.sites{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.site{position:relative;background:var(--card2);border:1px solid #365063;border-radius:15px;padding:17px;overflow:hidden;min-height:186px}.site:before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;right:-95px;top:-110px;background:var(--glow);filter:blur(22px);opacity:.3;pointer-events:none}.site.lock{opacity:.56;filter:saturate(.65)}.sitetop{display:flex;align-items:center;gap:11px}.glyph{font-size:25px;display:grid;place-items:center;width:46px;height:46px;border:1px solid #ffffff24;border-radius:13px;background:#ffffff0b}.site .detail{font-size:12px;color:var(--muted);margin:9px 0 16px;min-height:36px}.sitebottom{display:flex;justify-content:space-between;align-items:center;gap:6px}.counter{display:flex;align-items:center;gap:12px}.step{width:30px;height:30px;border-radius:9px;background:#ffffff0e;border:1px solid #ffffff30;color:var(--ink);font-size:19px}.step:hover{border-color:var(--gold);color:var(--gold)}.tag{font-size:10px;text-transform:uppercase;letter-spacing:.10em;color:var(--green);font-weight:700}.progress{height:4px;border-radius:20px;background:#ffffff1a;margin-top:15px;overflow:hidden}.progress i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#5284a2,#e6be77);transition:width .35s}
+.btn{border:0;border-radius:10px;padding:10px 14px;background:var(--gold);color:#1b1b22;font-weight:800}.btn:hover{filter:brightness(1.12)}.btn.alt{background:#263e51;color:#eaf1f4;border:1px solid #47637b}.btn.sell{background:#214c43;color:#aaf0c7}.btn.buy{background:#554633;color:#ffe2a7}.ghost{border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--muted);padding:9px 11px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.stack{display:grid;gap:12px}.contract{border:1px solid #314959;background:#172638;border-radius:13px;padding:14px}.contract .req{font-size:12px;color:var(--muted);margin:9px 0}.contract .reward{color:var(--gold);font-size:12px;font-weight:700}.contract .done{color:var(--green)}.contract button{width:100%;margin-top:9px}.tutorial{padding:16px;border-radius:13px;background:linear-gradient(125deg,#3f372d,#253a3b);border:1px solid #86745080}.tutorial strong{color:#f3ce8a}.tiny{font-size:12px;color:var(--muted)}.log{display:grid;gap:10px;max-height:220px;overflow:auto}.log div{font-size:12px;color:var(--muted);padding-bottom:7px;border-bottom:1px solid #ffffff10}.notice{position:fixed;z-index:100;bottom:24px;left:50%;transform:translate(-50%,20px);background:#e6be77;color:#09131f;font-weight:700;padding:13px 20px;border-radius:12px;opacity:0;pointer-events:none;transition:all .25s;box-shadow:0 16px 40px #0009;max-width:90vw}.notice.show{opacity:1;transform:translate(-50%,0)}
+.market-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}.market-intro{display:grid;grid-template-columns:1fr 250px;gap:14px;margin-bottom:16px}.event{background:linear-gradient(125deg,#473427,#263741);border:1px solid #775838;border-radius:14px;padding:16px}.event strong{color:var(--gold)}.select{background:#1b3041;border:1px solid #405b6d;color:var(--ink);padding:10px 11px;border-radius:9px;min-width:75px}.market-table{width:100%;border-collapse:collapse;text-align:left}.market-table th{padding:12px 9px;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--line)}.market-table td{border-bottom:1px solid #ffffff0f;padding:11px 9px}.market-table tr:hover td{background:#ffffff04}.market-table td strong{display:block}.market-table td small{color:var(--muted)}.market-table .quote{font:700 16px 'Space Grotesk',sans-serif}.market-table .btn{padding:8px 11px;font-size:12px}.market-table .stacked{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.market-scroll{overflow:auto}.market-table{min-width:730px}.green{color:var(--green)}.gold{color:var(--gold)}.red{color:var(--red)}
+.recipes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.recipe{background:#172638;border:1px solid #365063;border-radius:14px;padding:17px}.recipe .emoji{font-size:30px}.recipe h3{margin:9px 0 5px}.recipe p{font-size:12px;color:var(--muted);min-height:49px}.recipe .materials{font-size:12px;color:#e4cfa9;margin:12px 0}.recipe button{width:100%}.work{display:flex;justify-content:space-between;gap:14px;align-items:center;background:#213340;border:1px solid #436078;padding:15px;border-radius:13px;margin-bottom:16px;flex-wrap:wrap}.work i{font-style:normal;color:var(--gold)}.inv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.inv-item{border:1px solid #304657;background:#182737;padding:14px;border-radius:12px}.inv-item b{font:700 22px 'Space Grotesk',sans-serif;display:block;margin-top:6px}.inv-item .tiny{white-space:nowrap}.upgrades{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.upgrade{background:#192a38;border:1px solid var(--line);border-radius:13px;padding:17px}.upgrade p{font-size:12px;color:var(--muted);min-height:44px;margin:8px 0}.upgrade button{width:100%}.footer{border-top:1px solid #ffffff1c;padding-top:22px;margin-top:35px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.empty{border:1px dashed #526575;padding:28px;text-align:center;border-radius:13px;color:var(--muted)}.namebtn{font-size:12px;color:var(--gold);cursor:pointer;border-bottom:1px dashed var(--gold)}.noevents{pointer-events:none}
+@media(max-width:1050px){.hero{grid-template-columns:1fr}.main{grid-template-columns:1fr}.recipes{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.wrap{padding:0 14px 45px}.topbar{height:65px}.brand{font-size:15px}.topright .pill{display:none}.hero{padding:30px 0 22px;gap:22px}.hero-stats{gap:6px}.stat{padding:12px;min-height:90px}.stat b{font-size:20px}.stat span{font-size:10px}.panel{padding:15px}.sites{grid-template-columns:1fr}.site{min-height:165px}.recipes,.upgrades{grid-template-columns:1fr}.inv{grid-template-columns:repeat(2,1fr)}.market-intro{grid-template-columns:1fr}.tabs{gap:1px}.tab{padding:10px 12px;font-size:12px}.footer{font-size:11px}}
+</style></head>
+<body><div class="wrap"><header class="topbar"><div class="brand"><span class="logo">✧</span> BRUMA <span style="font-size:10px;color:#8198a6;letter-spacing:.08em">/ ALFA 0.1</span></div><div class="topright"><span class="pill"><span class="dot"></span>Mundo en movimiento</span><button class="quiet" data-act="share">Compartir ↗</button></div></header>
+<section class="hero"><div><small>GREMIO COMERCIAL · EL CONFÍN</small><h1>Construye tu gremio.<br><span class="em">Domina el mercado.</span></h1><p>Envía cuadrillas, aprovecha las rutas productivas y haz fortuna en una economía cambiante. Tu gremio sigue trabajando mientras estás fuera.</p></div><div class="hero-stats" id="stats"></div></section><nav class="tabs" id="tabs"></nav><main id="main"></main><footer class="footer"><span>BRUMA · Prototipo independiente · Guardado en este navegador</span><span>Economía NPC simulada: tus amigos juegan partidas separadas, todavía no hay comercio P2P.</span></footer></div><div class="notice" id="notice" role="status"></div>
+<script>
+(function(){
+"use strict";
+var KEY="bruma_gremios_v01";
+var ITEMS=[
+["wood","Madera","🪵",9],["ore","Hierro bruto","🪨",16],["herb","Hierbas","🌿",11],["coal","Carbón","⚫",25],["salt","Sal de marea","🧂",20],["relic","Fragmento antiguo","🔮",67],["plank","Tablones","🪚",32],["ingot","Lingote","🔩",76],["ink","Tinta de brezo","🧪",72],["crate","Kit expedicionario","🧰",235],["compass","Brújula arcana","🧭",300]
+];
+var SITES=[
+{id:"forest",name:"Bosque de Niebla",icon:"🌲",item:"wood",rare:null,unlock:0,time:12,glow:"#5bbf86",desc:"Tala regulada de madera. Recurso esencial para embalajes y construcciones."},
+{id:"quarry",name:"Canteras del Eco",icon:"⛏️",item:"ore",rare:"coal",unlock:0,time:13,glow:"#d99e74",desc:"Extrae hierro y pequeñas vetas de carbón para la fundición."},
+{id:"meadow",name:"Praderas del Brezo",icon:"🌾",item:"herb",rare:null,unlock:0,time:11,glow:"#a4bd65",desc:"Recolecta hierbas especiales para tintas y contratos."},
+{id:"coast",name:"Salinas del Estuario",icon:"🌊",item:"salt",rare:null,unlock:12,time:15,glow:"#79cee7",desc:"Se habilita con 12 de prestigio. Extrae sal de la costa."},
+{id:"ruins",name:"Ruinas Veladas",icon:"🏛️",item:"relic",rare:null,unlock:35,time:26,glow:"#b896dd",desc:"Se habilita con 35 de prestigio. Recupera reliquias antiguas."}
+];
+var RECIPES=[
+{id:"plank",name:"Aserrar tablones",icon:"🪚",inputs:{wood:3},out:2,time:25,desc:"Aumenta el valor de la madera mediante carpintería."},
+{id:"ingot",name:"Fundir lingote",icon:"🔩",inputs:{ore:2,coal:1},out:1,time:35,desc:"Refina minerales para herramientas y equipos."},
+{id:"ink",name:"Preparar tinta",icon:"🧪",inputs:{herb:2,salt:1},out:1,time:32,desc:"Producto de boticario muy buscado por los cartógrafos."},
+{id:"crate",name:"Kit expedicionario",icon:"🧰",inputs:{plank:2,ingot:1,herb:1},out:1,time:58,desc:"Bien elaborado: alta rentabilidad, cadena compleja."},
+{id:"compass",name:"Brújula arcana",icon:"🧭",inputs:{ingot:2,relic:1,ink:1},out:1,time:85,desc:"Artefacto premium para comerciantes y exploradores."}
+];
+var EVENTS=[
+{title:"Caravanas perdidas",desc:"Los comerciantes esperan retrasos en la frontera."},
+{title:"Subasta clandestina",desc:"Las casas mercantes compiten por recursos raros."},
+{title:"Temporada de cosecha",desc:"Los precios se ajustan a los excedentes regionales."},
+{title:"Nueva ruta oriental",desc:"El tráfico comercial altera las cotizaciones."},
+{title:"Escasez en los puertos",desc:"Los intermediarios reevalúan sus existencias."},
+{title:"Mercaderes de paso",desc:"Llegan compradores con órdenes renovadas."}
+];
+var CONTRACT_POOL=[
+{id:"c1",name:"Reparar la empalizada",needs:{wood:12,herb:4},coins:190,rep:6},
+{id:"c2",name:"Repuestos de mineros",needs:{ore:10,coal:2},coins:240,rep:8},
+{id:"c3",name:"Encargo del carpintero",needs:{plank:6},coins:230,rep:7},
+{id:"c4",name:"Cajas para el puerto",needs:{wood:16,plank:4},coins:290,rep:8},
+{id:"c5",name:"El boticario del norte",needs:{herb:15,salt:3},coins:300,rep:9},
+{id:"c6",name:"Piezas del astillero",needs:{ingot:3,plank:4},coins:385,rep:11},
+{id:"c7",name:"Suministros de exploración",needs:{crate:2},coins:560,rep:13},
+{id:"c8",name:"Una reliquia para el museo",needs:{relic:3},coins:370,rep:11},
+{id:"c9",name:"Cartografía de frontera",needs:{ink:3,plank:3},coins:440,rep:12},
+{id:"c10",name:"Instrumentos de navegación",needs:{compass:1},coins:510,rep:16}
+];
+function initial(){return{version:1,coins:580,rep:0,staff:4,assigned:{forest:2,quarry:1,meadow:1,coast:0,ruins:0},inventory:{wood:8,ore:6,herb:5,coal:3,salt:4},progress:{},craft:null,upgrades:{capacity:0,staff:0,yield:0,craft:0},tab:"territory",last:Date.now(),market:{tick:-1,bought:{},sold:{}},claims:{},activity:[{t:Date.now(),msg:"Se funda el gremio en el Confín."}]};}
+var s;
+try{s=JSON.parse(localStorage.getItem(KEY))||initial();if(s.version!==1||!s.inventory||!s.assigned)throw Error("bad");}catch(e){s=initial();}
+var $=function(id){return document.getElementById(id);};
+var marketQty=1, toastTimer=null;
+function f(n){return Math.floor(n||0).toLocaleString("es-MX");}
+function item(id){return ITEMS.find(function(i){return i[0]===id;});}
+function label(id){var i=item(id);return i?i[1]:id;}
+function icon(id){var i=item(id);return i?i[2]:"📦";}
+function count(id){return Math.floor(s.inventory[id]||0);}
+function used(){return Object.values(s.inventory).reduce(function(a,b){return a+(b||0);},0);}
+function capacity(){return 210+Number(s.upgrades.capacity||0)*90;}
+function free(){return Math.max(0,capacity()-used());}
+function totalAssigned(){return Object.values(s.assigned).reduce(function(a,b){return a+b;},0);}
+function freeStaff(){return s.staff-totalAssigned();}
+function put(id,n){var amount=Math.max(0,Math.min(n,free()));if(amount>0)s.inventory[id]=count(id)+amount;return amount;}
+function take(id,n){if(count(id)<n)return false;s.inventory[id]-=n;return true;}
+function canPay(needs){return Object.entries(needs).every(function(kv){return count(kv[0])>=kv[1];});}
+function pay(needs){if(!canPay(needs))return false;Object.entries(needs).forEach(function(kv){take(kv[0],kv[1]);});return true;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+function log(msg){s.activity.unshift({t:Date.now(),msg:msg});s.activity=s.activity.slice(0,12);}
+function toast(msg){var el=$("notice");el.textContent=msg;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove("show");},2800);}
+function hash(str){var h=2166136261;for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function rng(key){return hash(String(key)) / 4294967295;}
+function marketTick(){return Math.floor(Date.now()/900000);}
+function syncMarket(){var t=marketTick();if(s.market.tick!==t)s.market={tick:t,bought:{},sold:{}};}
+function quote(id){var t=marketTick(),base=item(id)[3],x=rng("BRUMA-09-"+id+"-"+t),wave=(x-.5)*.40;
+var event=Math.floor(t/4)%EVENTS.length;var mod=1;
+if(event===0&&(id==="wood"||id==="plank"))mod=1.15;
+if(event===1&&(id==="relic"||id==="compass"))mod=1.2;
+if(event===2&&(id==="herb"||id==="ink"))mod=.86;
+if(event===4&&(id==="salt"||id==="coal"))mod=1.18;
+var center=Math.max(2,Math.round(base*(1+wave)*mod));
+return {bid:Math.max(1,Math.floor(center*.84)),ask:Math.ceil(center*1.22),demand:8+Math.floor(rng("d"+id+t)*25),stock:6+Math.floor(rng("s"+id+t)*25),center:center};}
+function quota(id,dir){syncMarket();var q=quote(id);return Math.max(0,(dir==="sell"?q.demand-(s.market.sold[id]||0):q.stock-(s.market.bought[id]||0)));}
+function unlocked(site){return s.rep>=site.unlock;}
+function craftSpeed(){return 1+Number(s.upgrades.craft||0)*.15;}
+function startCraft(id,repeat){var r=RECIPES.find(function(x){return x.id===id;});if(!r)return false;
+if(s.craft){toast("El taller está ocupado.");return false;}
+if(!canPay(r.inputs)){toast("Faltan materiales.");return false;}
+pay(r.inputs);s.craft={id:id,remaining:r.time/craftSpeed(),repeat:!!repeat};log("El taller comenzó: "+r.name+".");return true;}
+function advanceCraft(dt){var guard=0;
+while(s.craft && dt>=0 && guard<400){guard++;
+var job=s.craft, recipe=RECIPES.find(function(r){return r.id===job.id;});
+if(!recipe){s.craft=null;break;}
+if(job.remaining>dt){job.remaining-=dt;break;}
+dt-=job.remaining;job.remaining=0;
+if(free()<recipe.out)break;
+put(recipe.id,recipe.out);
+if(job.repeat && canPay(recipe.inputs)){pay(recipe.inputs);job.remaining=recipe.time/craftSpeed();}
+else{s.craft=null;break;}
+}}
+function advance(dt){dt=Math.min(Math.max(0,dt),28800);if(dt<=0)return;
+SITES.forEach(function(site){
+var workers=s.assigned[site.id]||0;if(!workers||!unlocked(site))return;
+var step=site.time/(1+Number(s.upgrades.yield||0)*.12);
+s.progress[site.id]=(s.progress[site.id]||0)+dt*workers/step;
+var n=Math.floor(s.progress[site.id]);s.progress[site.id]-=n;
+var delivered=put(site.item,n);
+if(site.rare){s.progress["rare_"+site.id]=(s.progress["rare_"+site.id]||0)+delivered*.19;
+var bonus=Math.floor(s.progress["rare_"+site.id]);s.progress["rare_"+site.id]-=bonus;put(site.rare,bonus);}
+});
+advanceCraft(dt);
+}
+var arrival=Math.max(0,Math.min(28800,(Date.now()-(s.last||Date.now()))/1000));if(arrival>60){advance(arrival);log("Las cuadrillas trabajaron "+Math.round(arrival/60)+" min durante tu ausencia.");}s.last=Date.now();save();
+function offerTrade(id,dir,amount){amount=Number(amount);if(!Number.isInteger(amount)||amount<1)return;
+var q=quote(id),lim=quota(id,dir);
+if(lim<amount){toast("La oferta del mercado no alcanza esa cantidad.");return;}
+if(dir==="sell"){
+if(count(id)<amount){toast("No tienes suficientes recursos.");return;}
+take(id,amount);s.coins+=q.bid*amount;s.market.sold[id]=(s.market.sold[id]||0)+amount;
+log("Vendiste "+amount+" × "+label(id)+" por "+f(q.bid*amount)+" coronas.");toast("Venta realizada: +"+f(q.bid*amount)+" coronas.");
+}else{
+var cost=q.ask*amount;
+if(s.coins<cost){toast("No tienes suficientes coronas.");return;}
+if(free()<amount){toast("Tu almacén no tiene espacio.");return;}
+s.coins-=cost;put(id,amount);s.market.bought[id]=(s.market.bought[id]||0)+amount;log("Compraste "+amount+" × "+label(id)+".");toast("Compra realizada.");
+}}
+function day(){return Math.floor(Date.now()/86400000);}
+function contracts(){var d=day();
+if(d===20755)return CONTRACT_POOL.slice(0,3);
+var pool=CONTRACT_POOL.filter(function(c){return s.rep>=12||["c1","c2","c3","c4"].includes(c.id);});
+var shuffled=pool.map(function(c){return {c:c,h:hash("daily:"+d+":"+c.id)};}).sort(function(a,b){return a.h-b.h;});
+return shuffled.slice(0,3).map(function(x){return x.c;});}
+function acceptContract(id){var c=contracts().find(function(z){return z.id===id;});
+if(!c||s.claims[day()+"-"+id])return;
+if(!pay(c.needs)){toast("Aún faltan materiales para entregar.");return;}
+s.coins+=c.coins;s.rep+=c.rep;s.claims[day()+"-"+id]=true;
+log("Contrato completado: "+c.name+". +"+c.rep+" prestigio.");
+toast("¡Contrato entregado! +"+f(c.coins)+" coronas y +"+c.rep+" prestigio.");
+}
+var UPGRADES=[
+{id:"staff",name:"Contratar cuadrilla",icon:"👥",desc:"+1 trabajador disponible para tus rutas de recolección.",base:320,mult:1.75},
+{id:"capacity",name:"Ampliar el depósito",icon:"🏚️",desc:"+90 de capacidad para almacenar mercancías.",base:235,mult:1.7},
+{id:"yield",name:"Logística eficiente",icon:"📦",desc:"+12% de productividad por nivel en todas las regiones.",base:430,mult:1.9},
+{id:"craft",name:"Maestros artesanos",icon:"⚒️",desc:"+15% de velocidad de fabricación por nivel.",base:360,mult:1.9}
+];
+function upgradeCost(u){return Math.round(u.base*Math.pow(u.mult,Number(s.upgrades[u.id]||0)));}
+function purchaseUpgrade(id){var u=UPGRADES.find(function(x){return x.id===id;});if(!u)return;var cost=upgradeCost(u);
+if(s.coins<cost){toast("No hay coronas suficientes.");return;}
+s.coins-=cost;s.upgrades[id]=(s.upgrades[id]||0)+1;if(id==="staff")s.staff++;
+log("Mejora adquirida: "+u.name+".");toast("Mejora activada.");}
+function formatTime(sec){sec=Math.max(0,Math.ceil(sec));if(sec>=3600)return Math.floor(sec/3600)+" h "+Math.ceil((sec%3600)/60)+" m";if(sec>=60)return Math.floor(sec/60)+" m "+(sec%60)+" s";return sec+" s";}
+function needsHtml(needs){return Object.entries(needs).map(function(kv){return '<span class="'+(count(kv[0])>=kv[1]?"green":"red")+'">'+icon(kv[0])+" "+f(count(kv[0]))+"/"+kv[1]+" "+label(kv[0])+"</span>";}).join(" · ");}
+function renderStats(){$("stats").innerHTML=
+'<div class="stat"><span>🪙 CORONAS</span><b class="gold">'+f(s.coins)+'</b><span>Saldo del gremio</span></div>'+
+'<div class="stat"><span>✦ PRESTIGIO</span><b>'+f(s.rep)+'</b><span>Abre nuevas regiones</span></div>'+
+'<div class="stat"><span>▣ DEPÓSITO</span><b>'+f(used())+'<span class="small"> / '+f(capacity())+'</span></b><span>'+freeStaff()+' cuadrillas libres</span></div>';}
+function renderTabs(){var names=[["territory","🗺️ Territorio"],["market","⚖️ Bolsa negra"],["workshop","⚒️ Taller"],["warehouse","📦 Gremio"]];
+$("tabs").innerHTML=names.map(function(t){return '<button class="tab '+(s.tab===t[0]?"active":"")+'" data-act="tab" data-id="'+t[0]+'">'+t[1]+'</button>';}).join("");}
+function siteHtml(site){var open=unlocked(site),w=s.assigned[site.id]||0,progress=Math.floor((s.progress[site.id]||0)*100);
+return '<article class="site '+(!open?"lock":"")+'" style="--glow:'+site.glow+'">'+
+'<div class="sitetop"><div class="glyph">'+site.icon+'</div><div><h3>'+site.name+'</h3><div class="micro">'+(open?icon(site.item)+" "+label(site.item):"BLOQUEADO · "+site.unlock+" PRESTIGIO")+'</div></div></div>'+
+'<p class="detail">'+site.desc+'</p><div class="sitebottom">'+
+'<span class="tag">'+(open?(w? "● PRODUCIENDO":"○ SIN CUADRILLA"):"🔒 AÚN NO DISPONIBLE")+'</span>'+
+'<div class="counter"><button class="step" data-act="assign" data-id="'+site.id+'" data-delta="-1" '+(!open||w===0?"disabled":"")+' aria-label="Retirar cuadrilla">−</button><strong>'+w+'</strong><button class="step" data-act="assign" data-id="'+site.id+'" data-delta="1" '+(!open||freeStaff()===0?"disabled":"")+' aria-label="Asignar cuadrilla">+</button></div></div>'+
+'<div class="progress"><i style="width:'+(w?progress:0)+'%"></i></div></article>';}
+function renderContracts(){return '<section class="panel"><div class="head"><div><h2>Tablón de encargos</h2><div class="sub">Contratos renovados cada día · Entregas instantáneas</div></div></div><div class="stack">'+contracts().map(function(c){
+var claimed=!!s.claims[day()+"-"+c.id],able=canPay(c.needs);
+return '<div class="contract"><div class="row"><strong>'+c.name+'</strong><span class="micro">'+(claimed?"ENTREGADO":"ENCARGO")+'</span></div>'+
+'<div class="req">'+needsHtml(c.needs)+'</div><div class="row"><span class="reward">🪙 '+f(c.coins)+' · ✦ '+c.rep+'</span><span class="tiny">'+(claimed?'✓':'')+'</span></div>'+
+'<button class="btn '+(claimed?"alt":"")+'" data-act="contract" data-id="'+c.id+'" '+(claimed||!able?"disabled":"")+'>'+(claimed?"Completado":able?"Entregar mercancía":"Reunir materiales")+'</button></div>';
+}).join("")+'</div></section>';}
+function renderTerritory(){var main='<section class="panel"><div class="head"><div><h2>Regiones del Confín</h2><div class="sub">Asigna y retira cuadrillas sin penalización. Producen incluso si cierras el juego (hasta 8 horas).</div></div><span class="pill">'+freeStaff()+' libres / '+s.staff+'</span></div><div class="sites">'+SITES.map(siteHtml).join("")+'</div></section>';
+var logs='<section class="panel"><div class="head"><h2>Actividad</h2><span class="micro">EN TIEMPO REAL</span></div><div class="log">'+s.activity.slice(0,5).map(function(x){return '<div><span class="gold">'+new Date(x.t).toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"})+'</span> · '+x.msg+'</div>';}).join("")+'</div></section>';
+return '<div class="main"><div>'+main+'<section class="panel" style="margin-top:17px"><div class="tutorial"><strong>✦ Primer objetivo</strong><p class="tiny" style="margin-top:6px;color:#eadfce">Deja trabajar a tus cuadrillas, fabrica tablones en el taller y cumple encargos para ganar prestigio. A los 12 puntos podrás explorar las Salinas; a los 35, las Ruinas.</p><button class="btn alt" data-act="tab" data-id="workshop" style="margin-top:12px">Abrir taller →</button></div></section></div><aside>'+renderContracts()+logs+'</aside></div>';}
+function renderMarket(){syncMarket();var t=marketTick(),ev=EVENTS[Math.floor(t/4)%EVENTS.length];
+var remain=(t+1)*900000-Date.now();
+var rows=ITEMS.map(function(z){var id=z[0],q=quote(id),sell=quota(id,"sell"),buy=quota(id,"buy");
+return '<tr><td><strong>'+z[2]+' '+z[1]+'</strong><small>En almacén: '+f(count(id))+'</small></td>'+
+'<td><span class="quote green">'+f(q.bid)+'</span><br><small>Máx '+sell+'</small></td>'+
+'<td><span class="quote gold">'+f(q.ask)+'</span><br><small>Stock '+buy+'</small></td>'+
+'<td><div class="stacked"><button class="btn sell" data-act="trade" data-id="'+id+'" data-dir="sell" '+(sell<marketQty||count(id)<marketQty?"disabled":"")+'>Vender</button><button class="btn buy" data-act="trade" data-id="'+id+'" data-dir="buy" '+(buy<marketQty||free()<marketQty||s.coins<q.ask*marketQty?"disabled":"")+'>Comprar</button></div></td></tr>';}).join("");
+return '<div class="main one"><section class="panel"><div class="market-intro"><div class="event"><span class="micro">⚑ RUMOR DEL MERCADO</span><h2 style="margin:7px 0;color:var(--gold)">'+ev.title+'</h2><p class="tiny" style="color:#e4d1b9">'+ev.desc+' Las cotizaciones fluctúan con cada ronda comercial.</p></div><div class="panel" style="background:#172638"><span class="micro">NUEVAS OFERTAS EN</span><h2 class="gold" style="font-size:29px;margin:10px 0">'+formatTime(remain/1000)+'</h2><div class="tiny">Cotización mundial cada 15 min. Cupos de compra/venta por artículo y ronda.</div></div></div>'+
+'<div class="market-head"><div><h2>Bolsa clandestina</h2><p class="sub">Intermediarios no jugadores fijan precios variables. Comprar cuesta más que vender.</p></div><label class="tiny">Cantidad por operación <select id="marketQty" class="select">'+[1,5,10,25].map(function(n){return '<option value="'+n+'" '+(n===marketQty?"selected":"")+'>'+n+'</option>';}).join("")+'</select></label></div>'+
+'<div class="market-scroll"><table class="market-table"><thead><tr><th>Bien</th><th>La bolsa te paga / u.</th><th>La bolsa te cobra / u.</th><th>Operar</th></tr></thead><tbody>'+rows+'</tbody></table></div><p class="tiny" style="margin-top:14px">* Esta alfa usa ofertas NPC deterministas basadas en el horario. Cada navegador tiene inventario y cupos propios; aún no hay intercambios directos entre amigos.</p></section></div>';}
+function renderWorkshop(){var active=s.craft,ar=active?RECIPES.find(function(r){return r.id===active.id;}):null;
+var job=active?'<div class="work"><div><span class="micro">EN PRODUCCIÓN</span><h3>'+ar.icon+' '+ar.name+'</h3><span class="tiny">Termina en <i>'+formatTime(active.remaining)+'</i>'+(active.repeat?' · producción continua':' · una tanda')+'</span></div><button class="btn alt" data-act="cancelCraft">Cancelar repetición / trabajo</button></div>':
+'<div class="work"><div><span class="micro">TALLER DISPONIBLE</span><h3>Sin producción programada</h3><span class="tiny">Elige una receta y crea productos de alto valor.</span></div><span class="gold">⚒️</span></div>';
+return '<div class="main one"><section class="panel"><div class="head"><div><h2>Taller del Gremio</h2><div class="sub">Las recetas se completan solas. Activa repetición para producir mientras haya insumos y espacio.</div></div><span class="pill">Velocidad +'+(s.upgrades.craft*15)+'%</span></div>'+job+
+'<div class="recipes">'+RECIPES.map(function(r){
+return '<article class="recipe"><span class="emoji">'+r.icon+'</span><h3>'+r.name+'</h3><p>'+r.desc+'</p><div class="materials">'+needsHtml(r.inputs)+'</div><div class="row" style="margin-bottom:11px"><span class="tiny">Produce <strong>'+r.out+'</strong> · '+formatTime(r.time/craftSpeed())+'</span><span class="gold">Valor base '+f(item(r.id)[3]*r.out)+'</span></div><div class="stack"><button class="btn" data-act="craft" data-id="'+r.id+'" '+(active||!canPay(r.inputs)?"disabled":"")+'>Fabricar una tanda</button><button class="btn alt" data-act="craft-repeat" data-id="'+r.id+'" '+(active||!canPay(r.inputs)?"disabled":"")+'>↻ Producción continua</button></div></article>';}).join("")+'</div></section></div>';}
+function renderWarehouse(){var inv='<section class="panel"><div class="head"><div><h2>Tu almacén</h2><p class="sub">Todos tus productos, desde materias primas hasta manufacturas.</p></div><span class="pill">'+f(used())+'/'+f(capacity())+' ocupados</span></div><div class="inv">'+ITEMS.map(function(i){return '<div class="inv-item"><div class="tiny">'+i[2]+' '+i[1]+'</div><b>'+f(count(i[0]))+'</b></div>';}).join("")+'</div></section>';
+var up='<section class="panel"><div class="head"><div><h2>Inversiones del gremio</h2><p class="sub">Decide en qué crecer: capacidad, personal, logística o manufactura.</p></div></div><div class="upgrades">'+UPGRADES.map(function(u){return '<div class="upgrade"><h3>'+u.icon+' '+u.name+' <span class="gold">NV. '+(s.upgrades[u.id]||0)+'</span></h3><p>'+u.desc+'</p><button class="btn" data-act="upgrade" data-id="'+u.id+'" '+(s.coins<upgradeCost(u)?"disabled":"")+'>Comprar · 🪙 '+f(upgradeCost(u))+'</button></div>';}).join("")+'</div></section>';
+return '<div class="main one">'+inv+'<div style="margin-top:18px">'+up+'</div><section class="panel" style="margin-top:18px"><div class="head"><div><h2>Datos de partida</h2><p class="sub">Guardado automático local. Puedes conservar una copia de tu progreso.</p></div></div><div class="row" style="justify-content:flex-start;flex-wrap:wrap"><button class="btn alt" data-act="export">Exportar guardado (.json)</button><button class="ghost" data-act="import">Importar guardado</button><button class="ghost" data-act="reset">Reiniciar partida</button><input id="fileInput" type="file" accept="application/json" hidden></div></section></div>';}
+function render(){renderStats();renderTabs();$("main").innerHTML=s.tab==="market"?renderMarket():s.tab==="workshop"?renderWorkshop():s.tab==="warehouse"?renderWarehouse():renderTerritory();}
+document.addEventListener("click",function(e){var el=e.target.closest("[data-act]");if(!el||el.disabled)return;var act=el.dataset.act,id=el.dataset.id;
+if(act==="tab"){s.tab=id;}
+else if(act==="assign"){var site=SITES.find(function(x){return x.id===id;}),delta=Number(el.dataset.delta);
+if(!site||!unlocked(site))return;
+if(delta>0&&freeStaff()<1)return;if(delta<0&&(s.assigned[id]||0)<1)return;
+s.assigned[id]=(s.assigned[id]||0)+delta;
+if(delta>0)toast("Cuadrilla enviada a "+site.name+".");}
+else if(act==="contract")acceptContract(id);
+else if(act==="trade")offerTrade(id,el.dataset.dir,marketQty);
+else if(act==="craft"||act==="craft-repeat"){startCraft(id,act==="craft-repeat");}
+else if(act==="cancelCraft"){if(s.craft){s.craft=null;log("Producción cancelada; los insumos de esa tanda no se recuperan.");toast("Producción detenida. Los materiales usados no se devuelven.");}}
+else if(act==="upgrade")purchaseUpgrade(id);
+else if(act==="share"){var url=location.href.split("#")[0];if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(function(){toast("Liga copiada. Tus amigos inician su propia partida.");}).catch(function(){prompt("Copia esta liga:",url);});}else prompt("Copia esta liga:",url);}
+else if(act==="export"){save();var b=new Blob([JSON.stringify(s,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="bruma-partida.json";a.click();setTimeout(function(){URL.revokeObjectURL(a.href);},1000);}
+else if(act==="import"){$("fileInput").click();}
+else if(act==="reset"){if(confirm("¿Seguro que quieres eliminar la partida guardada de este navegador?")){localStorage.removeItem(KEY);location.reload();}}
+save();render();
+});
+document.addEventListener("change",function(e){if(e.target.id==="marketQty"){marketQty=Number(e.target.value)||1;render();}
+if(e.target.id==="fileInput"){var file=e.target.files&&e.target.files[0];if(!file)return;
+file.text().then(function(t){try{var incoming=JSON.parse(t);if(incoming.version!==1||!incoming.assigned||!incoming.inventory||typeof incoming.coins!=="number")throw Error("invalid");
+s=incoming;s.last=Date.now();save();render();toast("Partida importada.");}catch(err){toast("No es un guardado válido de BRUMA.");}});}});
+setInterval(function(){var now=Date.now(),dt=(now-s.last)/1000;if(dt>0){advance(dt);s.last=now;}if(marketTick()!==s.market.tick)syncMarket();render();if(Math.floor(now/1000)%5===0)save();},1000);
+render();
+})();
+</script></body></html>
